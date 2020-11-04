@@ -38,12 +38,32 @@ class FetchTool {
      * @param {Request} reqConfig - Request configuration for data to send.
      * @returns {Promise.<string>} Server returned metadata.
      */
-    send ({url, withCredentials = false, ...options}) {
-        return fetch(url, Object.assign({
-            credentials: withCredentials ? 'include' : 'omit'
-        }, options))
+    // send ({url, withCredentials = false, ...options}) {
+    //     return fetch(url, Object.assign({
+    //         credentials: withCredentials ? 'include' : 'omit'
+    //     }, options))
+    //         .then(response => {
+    //             if (response.ok) return response.text();
+    //             return Promise.reject(response.status);
+    //         });
+    // }
+    send ({url, method, ...params}) {
+        console.log(`+ storage FetchToole.js send() url...${url}, params...${params}`);
+        const formData = new FormData();
+
+        formData.append('userid', params.userid);
+        formData.append('wstoken', params.wstoken);
+        formData.append('wsfunction', params.wsfunction);
+        formData.append('assetid', params.assetid);
+        formData.append('dataformat', params.dataformat);
+        formData.append('typename', params.typename);
+        formData.append('moodlewsrestformat', params.moodlewsrestformat);
+        formData.append('projectid', params.projectid);
+        formData.append('data', params.body);
+            
+        return fetch(url, {method, body: formData})
             .then(response => {
-                if (response.ok) return response.text();
+                if (response.ok) return response.json();
                 return Promise.reject(response.status);
             });
     }

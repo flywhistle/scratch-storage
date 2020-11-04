@@ -174,6 +174,7 @@ class WebHelper extends Helper {
                         return body;
                     }
                 }
+                console.log(`+ storage Webhelper store() return...${JSON.stringify(body)}`);
                 return Object.assign({
                     id: body['content-name'] || assetId
                 }, body);
