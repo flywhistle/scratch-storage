@@ -75,6 +75,8 @@ class WebHelper extends Helper {
             create: createFunction,
             update: updateFunction
         });
+
+        console.log(`storage WebHelper.js addStore() called.  stores.length...${this.stores.length} types...${JSON.stringify(types)} stores[0].getFunction...${this.stores[0].get}`);
     }
 
     /**
@@ -101,9 +103,10 @@ class WebHelper extends Helper {
         const tryNextSource = () => {
             const store = stores[storeIndex++];
 
+            // console.log(`storage  WebHelper.js load() storeIndex[${storeIndex - 1}] store.get...${store.get}`);
+
             /** @type {UrlFunction} */
             const reqConfigFunction = store.get;
-
             if (reqConfigFunction) {
                 const reqConfig = ensureRequestConfig(reqConfigFunction(asset));
                 if (reqConfig === false) {

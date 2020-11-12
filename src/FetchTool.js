@@ -19,9 +19,18 @@ class FetchTool {
      * @returns {Promise.<Uint8Array>} Resolve to Buffer of data from server.
      */
     get ({url, ...options}) {
+        console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
+
         return fetch(url, Object.assign({method: 'GET'}, options))
-            .then(result => result.arrayBuffer())
+            .then(result => {
+                const text = result.json();
+                console.log(text);
+                return text;
+            })
             .then(body => new Uint8Array(body));
+        // return fetch(url, Object.assign({method: 'GET'}, options))
+        //     .then(result => result.json())
+        //     .then(result => result);
     }
 
     /**
@@ -49,8 +58,8 @@ class FetchTool {
     // }
     send ({url, method, ...params}) {
         console.log(`+ storage FetchToole.js send() url...${url}, params...${params}`);
-        const formData = new FormData();
 
+        const formData = new FormData();
         formData.append('userid', params.userid);
         formData.append('wstoken', params.wstoken);
         formData.append('wsfunction', params.wsfunction);
