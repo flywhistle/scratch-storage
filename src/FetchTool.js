@@ -19,6 +19,9 @@ class FetchTool {
      * @returns {Promise.<Uint8Array>} Resolve to Buffer of data from server.
      */
     get ({url, ...options}) {
+//          return fetch(url, Object.assign({method: 'GET'}, options))
+//             .then(result => result.arrayBuffer())
+//             .then(body => new Uint8Array(body));
         console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
 
         return fetch(url, Object.assign({method: 'GET'}, options))
