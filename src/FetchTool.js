@@ -18,22 +18,16 @@ class FetchTool {
      * @param {{method:string}} options - Additional options to configure fetch.
      * @returns {Promise.<Uint8Array>} Resolve to Buffer of data from server.
      */
-    get ({url, ...options}) {
-//          return fetch(url, Object.assign({method: 'GET'}, options))
-//             .then(result => result.arrayBuffer())
-//             .then(body => new Uint8Array(body));
-        console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
-
-        return fetch(url, Object.assign({method: 'GET'}, options))
-            .then(result => {
-                const text = result.json();
-                console.log(text);
-                return text;
-            })
-            .then(body => new Uint8Array(body));
-        // return fetch(url, Object.assign({method: 'GET'}, options))
-        //     .then(result => result.json())
-        //     .then(result => result);
+    // get ({url, ...options}) {
+    //      return fetch(url, Object.assign({method: 'GET'}, options))
+    //         .then(result => result.arrayBuffer())
+    //         .then(body => new Uint8Array(body));
+    // }
+    get ({url}) {
+        // console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
+        return fetch(url, {method: 'GET'})
+            .then(result => result.json())
+            .then(json => json.assetdata);
     }
 
     /**
@@ -60,8 +54,7 @@ class FetchTool {
     //         });
     // }
     send ({url, method, ...params}) {
-        console.log(`+ storage FetchToole.js send() url...${url}, params...${params}`);
-
+        // console.log(`+ storage FetchToole.js send() url...${url}, params...${params}`);
         const formData = new FormData();
         formData.append('userid', params.userid);
         formData.append('wstoken', params.wstoken);

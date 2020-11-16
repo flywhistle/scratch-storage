@@ -75,8 +75,6 @@ class WebHelper extends Helper {
             create: createFunction,
             update: updateFunction
         });
-
-        console.log(`storage WebHelper.js addStore() called.  stores.length...${this.stores.length} types...${JSON.stringify(types)} stores[0].getFunction...${this.stores[0].get}`);
     }
 
     /**
@@ -103,10 +101,9 @@ class WebHelper extends Helper {
         const tryNextSource = () => {
             const store = stores[storeIndex++];
 
-            // console.log(`storage  WebHelper.js load() storeIndex[${storeIndex - 1}] store.get...${store.get}`);
-
             /** @type {UrlFunction} */
             const reqConfigFunction = store.get;
+            console.log(`storage Webhelper.js get  reqConfigFunction...${reqConfigFunction}`);
             if (reqConfigFunction) {
                 const reqConfig = ensureRequestConfig(reqConfigFunction(asset));
                 if (reqConfig === false) {
@@ -177,7 +174,6 @@ class WebHelper extends Helper {
                         return body;
                     }
                 }
-                console.log(`+ storage Webhelper store() return...${JSON.stringify(body)}`);
                 return Object.assign({
                     id: body['content-name'] || assetId
                 }, body);
