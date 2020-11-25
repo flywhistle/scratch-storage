@@ -18,17 +18,18 @@ class FetchTool {
      * @param {{method:string}} options - Additional options to configure fetch.
      * @returns {Promise.<Uint8Array>} Resolve to Buffer of data from server.
      */
-    // get ({url, ...options}) {
-    //      return fetch(url, Object.assign({method: 'GET'}, options))
-    //         .then(result => result.arrayBuffer())
-    //         .then(body => new Uint8Array(body));
-    // }
-    get ({url}) {
-        // console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
-        return fetch(url, {method: 'GET'})
-            .then(result => result.json())
-            .then(json => json.assetdata);
+    get ({url, ...options}) {
+        console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
+        return fetch(url, Object.assign({method: 'GET'}, options))
+            .then(result => result.arrayBuffer())
+            .then(body => new Uint8Array(body));
     }
+    // get ({url}) {
+    //     // console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
+    //     return fetch(url, {method: 'GET'})
+    //         .then(result => result.json())
+    //         .then(json => json.assetdata);
+    // }
 
     /**
      * Is sending supported? false if the environment does not support sending

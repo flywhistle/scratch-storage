@@ -103,13 +103,13 @@ class WebHelper extends Helper {
 
             /** @type {UrlFunction} */
             const reqConfigFunction = store.get;
-            console.log(`storage Webhelper.js get  reqConfigFunction...${reqConfigFunction}`);
             if (reqConfigFunction) {
                 const reqConfig = ensureRequestConfig(reqConfigFunction(asset));
                 if (reqConfig === false) {
                     return tryNextSource();
                 }
 
+                console.log(`storage Webhelper.js get  reqConfig...${JSON.stringify(reqConfig)}`);
                 return tool.get(reqConfig)
                     .then(body => asset.setData(body, dataFormat))
                     .catch(tryNextSource);
