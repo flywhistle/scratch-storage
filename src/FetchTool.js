@@ -55,7 +55,8 @@ class FetchTool {
     //         });
     // }
     send ({url, method, ...params}) {
-        // console.log(`+ storage FetchToole.js send() url...${url}, params...${params}`);
+        console.log(`storage FetchToole.js send() url...${url}, params.typename...${params.typename}  params.body...${JSON.stringify(params.body)}`);
+        
         const formData = new FormData();
         formData.append('userid', params.userid);
         formData.append('wstoken', params.wstoken);
@@ -65,7 +66,13 @@ class FetchTool {
         formData.append('typename', params.typename);
         formData.append('moodlewsrestformat', params.moodlewsrestformat);
         formData.append('projectid', params.projectid);
-        formData.append('data', params.body);
+
+        if (params.typename === 'ImageBitmap') {
+            const jsonStr = JSON.stringify(params.body);
+            formData.append('data', jsonStr);
+        } else {
+            formData.append('data', params.body);
+        }
             
         return fetch(url, {method, body: formData})
             .then(response => {

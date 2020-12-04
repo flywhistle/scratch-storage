@@ -159,6 +159,8 @@ class WebHelper extends Helper {
         const reqConfig = ensureRequestConfig(
             create ? store.create(asset) : store.update(asset)
         );
+        
+        // console.log(`storage WebHelper.js store()  assetType...${assetType}  dataFormat...${dataFormat}   data...${JSON.stringify(data)}`);
         const reqBodyConfig = Object.assign({body: data, method}, reqConfig);
         return tool.send(reqBodyConfig)
             .then(body => {
