@@ -19,7 +19,6 @@ class FetchTool {
      * @returns {Promise.<Uint8Array>} Resolve to Buffer of data from server.
      */
     get ({url, ...options}) {
-        console.log(`storage FetchTool.js get  url...${url}  options...${JSON.stringify(options)}`);
         return fetch(url, Object.assign({method: 'GET'}, options))
             .then(result => result.arrayBuffer())
             .then(body => new Uint8Array(body));
@@ -55,8 +54,6 @@ class FetchTool {
     //         });
     // }
     send ({url, method, ...params}) {
-        console.log(`storage FetchToole.js send() url...${url}, params.typename...${params.typename}  params.body...${JSON.stringify(params.body)}`);
-        
         const formData = new FormData();
         formData.append('userid', params.userid);
         formData.append('wstoken', params.wstoken);
