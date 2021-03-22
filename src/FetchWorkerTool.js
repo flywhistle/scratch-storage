@@ -81,7 +81,6 @@ class PrivateFetchWorkerTool {
      * @returns {Promise.<Buffer>} Resolve to Buffer of data from server.
      */
     get ({url, ...options}) {
-        console.log(`storage FetchworkerTool.js get() url...${url} options...${options}`);
         return new Promise((resolve, reject) => {
             // TODO: Use a Scratch standard ID generator ...
             const id = Math.random().toString(16)

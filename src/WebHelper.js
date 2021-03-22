@@ -108,8 +108,6 @@ class WebHelper extends Helper {
                 if (reqConfig === false) {
                     return tryNextSource();
                 }
-
-                console.log(`storage Webhelper.js get  reqConfig...${JSON.stringify(reqConfig)}`);
                 return tool.get(reqConfig)
                     .then(body => asset.setData(body, dataFormat))
                     .catch(tryNextSource);
